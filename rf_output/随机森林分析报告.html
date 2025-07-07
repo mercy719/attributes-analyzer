@@ -1,0 +1,237 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>空气造型器随机森林分析报告</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 20px;
+                    background-color: #f0f2f5;
+                }
+                .report-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+                .report-title {
+                    text-align: center;
+                    color: #333;
+                    margin-bottom: 20px;
+                }
+                .report-section {
+                    background-color: white;
+                    border-radius: 8px;
+                    padding: 15px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+                .report-section h2 {
+                    color: #1a73e8;
+                    border-bottom: 1px solid #eee;
+                    padding-bottom: 10px;
+                    margin-top: 0;
+                }
+                iframe {
+                    width: 100%;
+                    height: 600px;
+                    border: none;
+                }
+                .metric-card {
+                    background-color: #f9f9f9;
+                    border-radius: 8px;
+                    padding: 15px;
+                    margin-bottom: 15px;
+                }
+                .metric-title {
+                    font-weight: bold;
+                    color: #555;
+                    margin-bottom: 10px;
+                }
+                .metric-value {
+                    font-size: 24px;
+                    color: #1a73e8;
+                }
+                .tabs {
+                    display: flex;
+                    background-color: #f1f1f1;
+                    border-radius: 8px 8px 0 0;
+                    overflow: hidden;
+                }
+                .tab {
+                    background-color: inherit;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    padding: 14px 16px;
+                    transition: 0.3s;
+                    font-size: 17px;
+                    flex: 1;
+                    text-align: center;
+                }
+                .tab:hover {
+                    background-color: #ddd;
+                }
+                .tab.active {
+                    background-color: white;
+                    border-top: 2px solid #1a73e8;
+                }
+                .tabcontent {
+                    display: none;
+                    padding: 6px 12px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="report-container">
+                <h1 class="report-title">空气造型器随机森林分析报告</h1>
+        
+                <div class="report-section">
+                    <h2>模型评估指标</h2>
+                    <div class="tabs">
+                        <button class="tab active" onclick="openTab(event, 'ValueMetrics')">销售额模型</button>
+                        <button class="tab" onclick="openTab(event, 'VolumeMetrics')">销量模型</button>
+                    </div>
+                    
+                    <div id="ValueMetrics" class="tabcontent" style="display: block;">
+        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                            <div class="metric-card">
+                                <div class="metric-title">R² 决定系数</div>
+                                <div class="metric-value">-0.0334</div>
+                                <div>(越接近1表示模型解释性越好)</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-title">RMSE 均方根误差</div>
+                                <div class="metric-value">68753.34</div>
+                                <div>(越低越好)</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-title">MAE 平均绝对误差</div>
+                                <div class="metric-value">26276.05</div>
+                                <div>(越低越好)</div>
+                            </div>
+                        </div>
+            
+                    </div>
+                    
+                    <div id="VolumeMetrics" class="tabcontent">
+        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                            <div class="metric-card">
+                                <div class="metric-title">R² 决定系数</div>
+                                <div class="metric-value">-0.2392</div>
+                                <div>(越接近1表示模型解释性越好)</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-title">RMSE 均方根误差</div>
+                                <div class="metric-value">515.12</div>
+                                <div>(越低越好)</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-title">MAE 平均绝对误差</div>
+                                <div class="metric-value">272.11</div>
+                                <div>(越低越好)</div>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+                
+                <!-- 特征重要性可视化 -->
+                <div class="report-section">
+                    <h2>特征重要性分析</h2>
+                    <div class="tabs">
+                        <button class="tab active" onclick="openTab(event, 'ValueImportance')">销售额影响因素</button>
+                        <button class="tab" onclick="openTab(event, 'VolumeImportance')">销量影响因素</button>
+                    </div>
+                    
+                    <div id="ValueImportance" class="tabcontent" style="display: block;">
+        <iframe src="月销售额(€)_特征重要性.html"></iframe>
+                    </div>
+                    
+                    <div id="VolumeImportance" class="tabcontent">
+        <iframe src="月销量_特征重要性.html"></iframe>
+                    </div>
+                </div>
+                
+                <!-- 最优特征组合分析 -->
+                <div class="report-section">
+                    <h2>最优产品特性组合建议</h2>
+                    <div class="tabs">
+                        <button class="tab active" onclick="openTab(event, 'ValueRecommendation')">销售额优化建议</button>
+                        <button class="tab" onclick="openTab(event, 'VolumeRecommendation')">销量优化建议</button>
+                    </div>
+                    
+                    <div id="ValueRecommendation" class="tabcontent" style="display: block;">
+        
+                        <h3>根据随机森林模型分析，建议优先考虑以下特征组合以优化销售额:</h3>
+                        <ul>
+            <li><strong>价格(€)</strong>: 对销售额影响显著</li><li><strong>外观颜色</strong>: 对销售额影响显著</li><li><strong>功率</strong>: 对销售额影响显著</li><li><strong>是否是高浓度负离子</strong>: 对销售额影响显著</li><li><strong>附带配件数量</strong>: 对销售额影响显著</li>
+                        </ul>
+                        <p>产品开发和营销重点应放在上述特性上，以最大化销售额潜力。</p>
+            
+                    </div>
+                    
+                    <div id="VolumeRecommendation" class="tabcontent">
+        
+                        <h3>根据随机森林模型分析，建议优先考虑以下特征组合以优化销量:</h3>
+                        <ul>
+            <li><strong>价格(€)</strong>: 对销量影响显著</li><li><strong>外观颜色</strong>: 对销量影响显著</li><li><strong>是否是高浓度负离子</strong>: 对销量影响显著</li><li><strong>功率</strong>: 对销量影响显著</li><li><strong>附带配件数量</strong>: 对销量影响显著</li>
+                        </ul>
+                        <p>产品开发和营销重点应放在上述特性上，以最大化销量潜力。</p>
+            
+                    </div>
+                </div>
+                
+                <!-- 结论与建议 -->
+                <div class="report-section">
+                    <h2>分析结论与建议</h2>
+                    <div>
+                        <h3>主要发现:</h3>
+                        <ul>
+        <li>销售额受<strong>价格(€)</strong>影响最大</li><li>销量受<strong>价格(€)</strong>影响最大</li><li>销售额和销量共同的关键影响因素包括: <strong>外观颜色</strong>, <strong>价格(€)</strong></li><li>特别影响销售额但对销量影响较小的因素: <strong>功率</strong></li><li>特别影响销量但对销售额影响较小的因素: <strong>是否是高浓度负离子</strong></li>
+                        </ul>
+                        
+                        <h3>产品开发建议:</h3>
+                        <ul>
+        <li>产品设计时，应基于模型确定的重要特征进行优先级排序</li><li>根据不同的业务目标(提高销售额或销量)，可选择侧重不同的产品特性</li>
+                            <li>新产品开发时，可使用此模型预测不同特征组合的预期销售表现</li>
+                        </ul>
+                        
+                        <h3>模型应用与限制:</h3>
+                        <ul>
+                            <li>模型结果应与市场调研和专业判断相结合使用</li>
+                            <li>随着市场变化，应定期更新数据并重新训练模型</li>
+                            <li>模型无法反映未在训练数据中出现的新特性或市场趋势</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                
+                // 获取当前section的所有tabcontent
+                var parent = evt.currentTarget.closest('.report-section');
+                tabcontent = parent.getElementsByClassName("tabcontent");
+                
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                
+                // 只更新当前部分的标签页样式
+                tablinks = parent.getElementsByClassName("tab");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            </script>
+        </body>
+        </html>
+        

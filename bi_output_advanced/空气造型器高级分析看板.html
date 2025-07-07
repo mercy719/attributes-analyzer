@@ -1,0 +1,409 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>空气造型器高级分析看板</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f0f2f5;
+            }
+            .dashboard-container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .dashboard-title {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+            .dashboard-section {
+                background-color: white;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .dashboard-section h2 {
+                color: #1a73e8;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 10px;
+                margin-top: 0;
+            }
+            iframe {
+                width: 100%;
+                height: 600px;
+                border: none;
+            }
+            .tabs {
+                display: flex;
+                background-color: #f1f1f1;
+                border-radius: 8px 8px 0 0;
+                overflow: hidden;
+            }
+            .tab {
+                background-color: inherit;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+                flex: 1;
+                text-align: center;
+            }
+            .tab:hover {
+                background-color: #ddd;
+            }
+            .tab.active {
+                background-color: white;
+                border-top: 2px solid #1a73e8;
+            }
+            .tabcontent {
+                display: none;
+                padding: 6px 12px;
+                border-top: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="dashboard-container">
+            <h1 class="dashboard-title">空气造型器高级分析看板</h1>
+            
+            <!-- 汇总表格部分 -->
+            <div class="dashboard-section">
+                <h2>影响因素汇总表</h2>
+                <div class="tabs">
+                    <button class="tab active" onclick="openTab(event, 'SummaryValue')">销售额影响因素</button>
+                    <button class="tab" onclick="openTab(event, 'SummaryVolume')">销量影响因素</button>
+                    <button class="tab" onclick="openTab(event, 'SummaryPrice')">售价影响因素</button>
+                </div>
+                
+                <div id="SummaryValue" class="tabcontent" style="display: block;">
+                    <iframe src="销售额影响因素汇总表.html"></iframe>
+                </div>
+                
+                <div id="SummaryVolume" class="tabcontent">
+                    <iframe src="销量影响因素汇总表.html"></iframe>
+                </div>
+                
+                <div id="SummaryPrice" class="tabcontent">
+                    <iframe src="售价影响因素汇总表.html"></iframe>
+                </div>
+            </div>
+            
+            <!-- 平均值分析部分 -->
+            <div class="dashboard-section">
+                <h2>平均值分析</h2>
+                <div class="tabs">
+                    <button class="tab active" onclick="openTab(event, 'AvgValue')">平均销售额分析</button>
+                    <button class="tab" onclick="openTab(event, 'AvgVolume')">平均销量分析</button>
+                    <button class="tab" onclick="openTab(event, 'AvgPrice')">平均售价分析</button>
+                </div>
+                
+                <div id="AvgValue" class="tabcontent" style="display: block;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+    <iframe src="外观颜色_平均销售额关系.html"></iframe>
+<iframe src="是否有收纳盒_平均销售额关系.html"></iframe>
+<iframe src="功率_平均销售额关系.html"></iframe>
+<iframe src="风速档位数量_平均销售额关系.html"></iframe>
+<iframe src="温度档位数量_平均销售额关系.html"></iframe>
+<iframe src="有无恒温技术_平均销售额关系.html"></iframe>
+<iframe src="有无负离子功能_平均销售额关系.html"></iframe>
+<iframe src="是否是高浓度负离子_平均销售额关系.html"></iframe>
+<iframe src="马达类型_平均销售额关系.html"></iframe>
+<iframe src="附带配件数量_平均销售额关系.html"></iframe>
+<iframe src="水箱容量_平均销售额关系.html"></iframe>
+
+                    </div>
+                </div>
+                
+                <div id="AvgVolume" class="tabcontent">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+    <iframe src="外观颜色_平均销量关系.html"></iframe>
+<iframe src="是否有收纳盒_平均销量关系.html"></iframe>
+<iframe src="功率_平均销量关系.html"></iframe>
+<iframe src="风速档位数量_平均销量关系.html"></iframe>
+<iframe src="温度档位数量_平均销量关系.html"></iframe>
+<iframe src="有无恒温技术_平均销量关系.html"></iframe>
+<iframe src="有无负离子功能_平均销量关系.html"></iframe>
+<iframe src="是否是高浓度负离子_平均销量关系.html"></iframe>
+<iframe src="马达类型_平均销量关系.html"></iframe>
+<iframe src="附带配件数量_平均销量关系.html"></iframe>
+<iframe src="水箱容量_平均销量关系.html"></iframe>
+
+                    </div>
+                </div>
+                
+                <div id="AvgPrice" class="tabcontent">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+    <iframe src="外观颜色_平均售价关系.html"></iframe>
+<iframe src="是否有收纳盒_平均售价关系.html"></iframe>
+<iframe src="功率_平均售价关系.html"></iframe>
+<iframe src="风速档位数量_平均售价关系.html"></iframe>
+<iframe src="温度档位数量_平均售价关系.html"></iframe>
+<iframe src="有无恒温技术_平均售价关系.html"></iframe>
+<iframe src="有无负离子功能_平均售价关系.html"></iframe>
+<iframe src="是否是高浓度负离子_平均售价关系.html"></iframe>
+<iframe src="马达类型_平均售价关系.html"></iframe>
+<iframe src="附带配件数量_平均售价关系.html"></iframe>
+<iframe src="水箱容量_平均售价关系.html"></iframe>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中位数分析部分 -->
+            <div class="dashboard-section">
+                <h2>中位数分析</h2>
+                <div class="tabs">
+                    <button class="tab active" onclick="openTab(event, 'MedianValue')">中位数销售额分析</button>
+                    <button class="tab" onclick="openTab(event, 'MedianVolume')">中位数销量分析</button>
+                    <button class="tab" onclick="openTab(event, 'MedianPrice')">中位数售价分析</button>
+                </div>
+                
+                <div id="MedianValue" class="tabcontent" style="display: block;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+    <iframe src="外观颜色_中位数销售额关系.html"></iframe>
+<iframe src="是否有收纳盒_中位数销售额关系.html"></iframe>
+<iframe src="功率_中位数销售额关系.html"></iframe>
+<iframe src="风速档位数量_中位数销售额关系.html"></iframe>
+<iframe src="温度档位数量_中位数销售额关系.html"></iframe>
+<iframe src="有无恒温技术_中位数销售额关系.html"></iframe>
+<iframe src="有无负离子功能_中位数销售额关系.html"></iframe>
+<iframe src="是否是高浓度负离子_中位数销售额关系.html"></iframe>
+<iframe src="马达类型_中位数销售额关系.html"></iframe>
+<iframe src="附带配件数量_中位数销售额关系.html"></iframe>
+<iframe src="水箱容量_中位数销售额关系.html"></iframe>
+
+                    </div>
+                </div>
+                
+                <div id="MedianVolume" class="tabcontent">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+    <iframe src="外观颜色_中位数销量关系.html"></iframe>
+<iframe src="是否有收纳盒_中位数销量关系.html"></iframe>
+<iframe src="功率_中位数销量关系.html"></iframe>
+<iframe src="风速档位数量_中位数销量关系.html"></iframe>
+<iframe src="温度档位数量_中位数销量关系.html"></iframe>
+<iframe src="有无恒温技术_中位数销量关系.html"></iframe>
+<iframe src="有无负离子功能_中位数销量关系.html"></iframe>
+<iframe src="是否是高浓度负离子_中位数销量关系.html"></iframe>
+<iframe src="马达类型_中位数销量关系.html"></iframe>
+<iframe src="附带配件数量_中位数销量关系.html"></iframe>
+<iframe src="水箱容量_中位数销量关系.html"></iframe>
+
+                    </div>
+                </div>
+                
+                <div id="MedianPrice" class="tabcontent">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+    <iframe src="外观颜色_中位数售价关系.html"></iframe>
+<iframe src="是否有收纳盒_中位数售价关系.html"></iframe>
+<iframe src="功率_中位数售价关系.html"></iframe>
+<iframe src="风速档位数量_中位数售价关系.html"></iframe>
+<iframe src="温度档位数量_中位数售价关系.html"></iframe>
+<iframe src="有无恒温技术_中位数售价关系.html"></iframe>
+<iframe src="有无负离子功能_中位数售价关系.html"></iframe>
+<iframe src="是否是高浓度负离子_中位数售价关系.html"></iframe>
+<iframe src="马达类型_中位数售价关系.html"></iframe>
+<iframe src="附带配件数量_中位数售价关系.html"></iframe>
+<iframe src="水箱容量_中位数售价关系.html"></iframe>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 容量专门分析部分 -->
+            <div class="dashboard-section">
+                <h2>水箱容量专门分析</h2>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: #495057; margin-bottom: 10px;">容量分析说明</h4>
+                    <p style="margin: 0; color: #6c757d;">本分析专门针对水箱容量与销售额的关系进行深入研究，包含中位数和平均值两个维度的对比。</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                    <iframe src="水箱容量_中位数销售额关系.html"></iframe>
+                    <iframe src="水箱容量_平均销售额关系.html"></iframe>
+                </div>
+            </div>
+            
+            <!-- 属性详细分析部分 -->
+            <div class="dashboard-section">
+                <h2>属性详细分析</h2>
+                <div class="tabs">
+    <button class="tab active" onclick="openTab(event, '外观颜色Detail')">外观颜色</button>
+<button class="tab" onclick="openTab(event, '是否有收纳盒Detail')">是否有收纳盒</button>
+<button class="tab" onclick="openTab(event, '功率Detail')">功率</button>
+<button class="tab" onclick="openTab(event, '风速档位数量Detail')">风速档位数量</button>
+<button class="tab" onclick="openTab(event, '温度档位数量Detail')">温度档位数量</button>
+<button class="tab" onclick="openTab(event, '有无恒温技术Detail')">有无恒温技术</button>
+<button class="tab" onclick="openTab(event, '有无负离子功能Detail')">有无负离子功能</button>
+<button class="tab" onclick="openTab(event, '是否是高浓度负离子Detail')">是否是高浓度负离子</button>
+<button class="tab" onclick="openTab(event, '马达类型Detail')">马达类型</button>
+<button class="tab" onclick="openTab(event, '附带配件数量Detail')">附带配件数量</button>
+<button class="tab" onclick="openTab(event, '水箱容量Detail')">水箱容量</button>
+</div>
+
+        <div id="外观颜色Detail" class="tabcontent" style="display: block;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="外观颜色_平均销售额关系.html"></iframe>
+<iframe src="外观颜色_平均销量关系.html"></iframe>
+<iframe src="外观颜色_平均售价关系.html"></iframe>
+<iframe src="外观颜色_中位数销售额关系.html"></iframe>
+<iframe src="外观颜色_中位数销量关系.html"></iframe>
+<iframe src="外观颜色_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="是否有收纳盒Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="是否有收纳盒_平均销售额关系.html"></iframe>
+<iframe src="是否有收纳盒_平均销量关系.html"></iframe>
+<iframe src="是否有收纳盒_平均售价关系.html"></iframe>
+<iframe src="是否有收纳盒_中位数销售额关系.html"></iframe>
+<iframe src="是否有收纳盒_中位数销量关系.html"></iframe>
+<iframe src="是否有收纳盒_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="功率Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="功率_平均销售额关系.html"></iframe>
+<iframe src="功率_平均销量关系.html"></iframe>
+<iframe src="功率_平均售价关系.html"></iframe>
+<iframe src="功率_中位数销售额关系.html"></iframe>
+<iframe src="功率_中位数销量关系.html"></iframe>
+<iframe src="功率_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="风速档位数量Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="风速档位数量_平均销售额关系.html"></iframe>
+<iframe src="风速档位数量_平均销量关系.html"></iframe>
+<iframe src="风速档位数量_平均售价关系.html"></iframe>
+<iframe src="风速档位数量_中位数销售额关系.html"></iframe>
+<iframe src="风速档位数量_中位数销量关系.html"></iframe>
+<iframe src="风速档位数量_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="温度档位数量Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="温度档位数量_平均销售额关系.html"></iframe>
+<iframe src="温度档位数量_平均销量关系.html"></iframe>
+<iframe src="温度档位数量_平均售价关系.html"></iframe>
+<iframe src="温度档位数量_中位数销售额关系.html"></iframe>
+<iframe src="温度档位数量_中位数销量关系.html"></iframe>
+<iframe src="温度档位数量_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="有无恒温技术Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="有无恒温技术_平均销售额关系.html"></iframe>
+<iframe src="有无恒温技术_平均销量关系.html"></iframe>
+<iframe src="有无恒温技术_平均售价关系.html"></iframe>
+<iframe src="有无恒温技术_中位数销售额关系.html"></iframe>
+<iframe src="有无恒温技术_中位数销量关系.html"></iframe>
+<iframe src="有无恒温技术_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="有无负离子功能Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="有无负离子功能_平均销售额关系.html"></iframe>
+<iframe src="有无负离子功能_平均销量关系.html"></iframe>
+<iframe src="有无负离子功能_平均售价关系.html"></iframe>
+<iframe src="有无负离子功能_中位数销售额关系.html"></iframe>
+<iframe src="有无负离子功能_中位数销量关系.html"></iframe>
+<iframe src="有无负离子功能_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="是否是高浓度负离子Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="是否是高浓度负离子_平均销售额关系.html"></iframe>
+<iframe src="是否是高浓度负离子_平均销量关系.html"></iframe>
+<iframe src="是否是高浓度负离子_平均售价关系.html"></iframe>
+<iframe src="是否是高浓度负离子_中位数销售额关系.html"></iframe>
+<iframe src="是否是高浓度负离子_中位数销量关系.html"></iframe>
+<iframe src="是否是高浓度负离子_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="马达类型Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="马达类型_平均销售额关系.html"></iframe>
+<iframe src="马达类型_平均销量关系.html"></iframe>
+<iframe src="马达类型_平均售价关系.html"></iframe>
+<iframe src="马达类型_中位数销售额关系.html"></iframe>
+<iframe src="马达类型_中位数销量关系.html"></iframe>
+<iframe src="马达类型_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="附带配件数量Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="附带配件数量_平均销售额关系.html"></iframe>
+<iframe src="附带配件数量_平均销量关系.html"></iframe>
+<iframe src="附带配件数量_平均售价关系.html"></iframe>
+<iframe src="附带配件数量_中位数销售额关系.html"></iframe>
+<iframe src="附带配件数量_中位数销量关系.html"></iframe>
+<iframe src="附带配件数量_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+        <div id="水箱容量Detail" class="tabcontent" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+        <iframe src="水箱容量_平均销售额关系.html"></iframe>
+<iframe src="水箱容量_平均销量关系.html"></iframe>
+<iframe src="水箱容量_平均售价关系.html"></iframe>
+<iframe src="水箱容量_中位数销售额关系.html"></iframe>
+<iframe src="水箱容量_中位数销量关系.html"></iframe>
+<iframe src="水箱容量_中位数售价关系.html"></iframe>
+
+            </div>
+        </div>
+        
+            </div>
+        </div>
+        
+        <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // 获取当前section的所有tabcontent
+            var parent = evt.currentTarget.closest('.dashboard-section');
+            tabcontent = parent.getElementsByClassName("tabcontent");
+            
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // 只更新当前部分的标签页样式
+            tablinks = parent.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        </script>
+    </body>
+    </html>
+    

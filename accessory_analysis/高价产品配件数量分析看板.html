@@ -1,0 +1,109 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>高价产品配件数量与销售表现分析</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f0f2f5;
+            }
+            .dashboard-container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .dashboard-title {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+            .dashboard-section {
+                background-color: white;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .dashboard-section h2 {
+                color: #1a73e8;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 10px;
+                margin-top: 0;
+            }
+            iframe {
+                width: 100%;
+                height: 500px;
+                border: none;
+            }
+            .data-summary {
+                background-color: #e8f4fe;
+                border-left: 4px solid #1a73e8;
+                padding: 15px;
+                margin: 15px 0;
+                border-radius: 4px;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            @media (max-width: 768px) {
+                .grid-container {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="dashboard-container">
+            <h1 class="dashboard-title">高价产品(100€以上)配件数量与销售表现分析</h1>
+            
+            <!-- 数据摘要部分 -->
+            <div class="dashboard-section">
+                <h2>数据摘要</h2>
+                <div class="data-summary">
+                    <h3>高价产品配件数量分析</h3>
+                    <p><strong>分析产品总数:</strong> 20</p>
+                    <p><strong>价格范围:</strong> 100.00€ - 599.99€</p>
+                    <p><strong>配件数量分布:</strong></p>
+                    <ul>
+                    <li><strong>3.0 个配件:</strong> 1 个产品</li>
+<li><strong>4.0 个配件:</strong> 2 个产品</li>
+<li><strong>5.0 个配件:</strong> 2 个产品</li>
+<li><strong>6.0 个配件:</strong> 5 个产品</li>
+<li><strong>7.0 个配件:</strong> 8 个产品</li>
+<li><strong>8.0 个配件:</strong> 1 个产品</li>
+<li><strong>12.0 个配件:</strong> 1 个产品</li>
+                    </ul>
+                    <hr>
+                    <p><strong>关键发现:</strong></p>
+                    <p>
+                    在高价产品中，配件数量与销售表现呈现明显关联。配件数量为 3 个的产品平均销售额最高，而配件数量为 3 个的产品平均销量表现最佳。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 销售额和销量分析 -->
+            <div class="dashboard-section">
+                <h2>配件数量与销售表现</h2>
+                <div class="grid-container">
+                    <iframe src="高价产品配件数量与销售额.html"></iframe>
+                    <iframe src="高价产品配件数量与销量.html"></iframe>
+                </div>
+            </div>
+            
+            <!-- 价格分布和散点图 -->
+            <div class="dashboard-section">
+                <h2>价格分布与多维度分析</h2>
+                <div class="grid-container">
+                    <iframe src="高价产品配件数量与售价分布.html"></iframe>
+                    <iframe src="高价产品散点图分析.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    

@@ -1,0 +1,126 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>产品售价与销售表现关系分析</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f0f2f5;
+            }
+            .dashboard-container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .dashboard-title {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+            .dashboard-section {
+                background-color: white;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .dashboard-section h2 {
+                color: #1a73e8;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 10px;
+                margin-top: 0;
+            }
+            iframe {
+                width: 100%;
+                height: 600px;
+                border: none;
+            }
+            .summary-box {
+                background-color: #e8f4fe;
+                border-left: 4px solid #1a73e8;
+                padding: 15px;
+                margin: 15px 0;
+                border-radius: 4px;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            @media (max-width: 768px) {
+                .grid-container {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="dashboard-container">
+            <h1 class="dashboard-title">产品售价与销售表现关系分析</h1>
+            
+            <!-- 相关性摘要 -->
+            <div class="dashboard-section">
+                <h2>相关性分析摘要</h2>
+                <div class="summary-box">
+                    <h3>售价与销售表现的关系</h3>
+                    <p><strong>售价与销售额相关系数:</strong> 0.0939</p>
+                    <p><strong>售价与销量相关系数:</strong> -0.0795</p>
+                    <p><strong>售价与销售额斯皮尔曼相关系数:</strong> 0.5147</p>
+                    <p><strong>售价与销量斯皮尔曼相关系数:</strong> 0.1185</p>
+                    <hr>
+                    <p><strong>结论:</strong> 
+                    售价与销售额呈<b>正相关</b>，说明价格较高的产品通常能带来更高的销售额；而售价与销量呈<b>负相关</b>，表明价格越高，销量往往越低。
+                    </p>
+                    <p><strong>价格弹性分析:</strong> 平均价格弹性为 -111.08，
+                    这意味着价格每上升1%，销量平均下降111.08%。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 售价分布图 -->
+            <div class="dashboard-section">
+                <h2>售价分布分析</h2>
+                <iframe src="售价分布图.html"></iframe>
+            </div>
+            
+            <!-- 散点图分析 -->
+            <div class="dashboard-section">
+                <h2>售价与销售表现散点图分析</h2>
+                <div class="grid-container">
+                    <iframe src="售价与销售额关系.html"></iframe>
+                    <iframe src="售价与销量关系.html"></iframe>
+                </div>
+            </div>
+            
+            <!-- 价格区间分析 -->
+            <div class="dashboard-section">
+                <h2>价格区间销售表现分析</h2>
+                <iframe src="价格区间平均销售表现.html"></iframe>
+                <iframe src="价格区间中位数销售表现.html"></iframe>
+            </div>
+            
+            <!-- 价格弹性分析 -->
+            <div class="dashboard-section">
+                <h2>价格弹性分析</h2>
+                <iframe src="价格弹性分布.html"></iframe>
+                <div class="summary-box">
+                    <h3>价格弹性解读</h3>
+                    <p>价格弹性是衡量价格变动对销量影响的指标，计算公式为销量变化百分比除以价格变化百分比。</p>
+                    <ul>
+                        <li><strong>弹性值 < -1:</strong> 富有弹性，价格变动导致更大比例的销量变化</li>
+                        <li><strong>弹性值 = -1:</strong> 单位弹性，价格和销量变化比例相同</li>
+                        <li><strong>-1 < 弹性值 < 0:</strong> 缺乏弹性，价格变动导致较小比例的销量变化</li>
+                        <li><strong>弹性值 > 0:</strong> 异常弹性，可能与产品定位、市场结构或奢侈品特性相关</li>
+                    </ul>
+                    <p><strong>本次分析结果:</strong> 平均价格弹性为 -111.08，
+                    表明空气造型器市场是富有弹性的，消费者对价格变化较为敏感
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    

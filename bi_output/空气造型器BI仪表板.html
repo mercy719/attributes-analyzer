@@ -1,0 +1,214 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>空气造型器产品属性分析仪表板</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f0f2f5;
+            }
+            .dashboard-container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .dashboard-title {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+            .dashboard-section {
+                background-color: white;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .dashboard-section h2 {
+                color: #1a73e8;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 10px;
+                margin-top: 0;
+            }
+            iframe {
+                width: 100%;
+                height: 800px;
+                border: none;
+            }
+            .tabs {
+                display: flex;
+                background-color: #f1f1f1;
+                border-radius: 8px 8px 0 0;
+                overflow: hidden;
+            }
+            .tab {
+                background-color: inherit;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+                flex: 1;
+                text-align: center;
+            }
+            .tab:hover {
+                background-color: #ddd;
+            }
+            .tab.active {
+                background-color: white;
+                border-top: 2px solid #1a73e8;
+            }
+            .tabcontent {
+                display: none;
+                padding: 6px 12px;
+                border-top: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="dashboard-container">
+            <h1 class="dashboard-title">空气造型器产品属性分析仪表板</h1>
+    
+            <div class="dashboard-section">
+                <div class="tabs">
+    <button class="tab active" onclick="openTab(event, 'SalesValue')">销售额分析</button>
+<button class="tab" onclick="openTab(event, 'SalesVolume')">销量分析</button>
+</div>
+
+                <div id="SalesValue" class="tabcontent" style="display: block;">
+                    <iframe src="销售额分析看板.html"></iframe>
+                </div>
+        
+                <div id="SalesVolume" class="tabcontent" style="display: none;">
+                    <iframe src="销量分析看板.html"></iframe>
+                </div>
+        </div>
+
+            <!-- 详细分析部分 -->
+            <div class="dashboard-section">
+                <h2>详细属性分析</h2>
+                <div class="tabs">
+        <button class="tab active" onclick="openTab(event, '外观颜色')">外观颜色</button>
+<button class="tab" onclick="openTab(event, '是否有收纳盒')">是否有收纳盒</button>
+<button class="tab" onclick="openTab(event, '功率')">功率</button>
+<button class="tab" onclick="openTab(event, '风速档位数量')">风速档位数量</button>
+<button class="tab" onclick="openTab(event, '温度档位数量')">温度档位数量</button>
+<button class="tab" onclick="openTab(event, '有无恒温技术')">有无恒温技术</button>
+<button class="tab" onclick="openTab(event, '有无负离子功能')">有无负离子功能</button>
+<button class="tab" onclick="openTab(event, '是否是高浓度负离子')">是否是高浓度负离子</button>
+<button class="tab" onclick="openTab(event, '马达类型')">马达类型</button>
+<button class="tab" onclick="openTab(event, '附带配件数量')">附带配件数量</button>
+</div>
+
+            <div id="外观颜色" class="tabcontent" style="display: block;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="外观颜色_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="外观颜色_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="是否有收纳盒" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="是否有收纳盒_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="是否有收纳盒_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="功率" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="功率_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="功率_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="风速档位数量" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="风速档位数量_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="风速档位数量_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="温度档位数量" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="温度档位数量_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="温度档位数量_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="有无恒温技术" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="有无恒温技术_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="有无恒温技术_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="有无负离子功能" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="有无负离子功能_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="有无负离子功能_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="是否是高浓度负离子" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="是否是高浓度负离子_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="是否是高浓度负离子_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="马达类型" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="马达类型_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="马达类型_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            <div id="附带配件数量" class="tabcontent" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+            <iframe src="附带配件数量_销售额关系.html" style="height: 500px;"></iframe>
+<iframe src="附带配件数量_销量关系.html" style="height: 500px;"></iframe>
+
+                </div>
+            </div>
+            
+            </div>
+        
+        </div>
+        
+        <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                if (tabcontent[i].id.includes(tabName)) {
+                    tabcontent[i].style.display = "block";
+                } else {
+                    tabcontent[i].style.display = "none";
+                }
+            }
+            
+            // 只更新当前部分的标签页样式
+            var parentDiv = evt.currentTarget.parentElement;
+            tablinks = parentDiv.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            evt.currentTarget.className += " active";
+        }
+        </script>
+    </body>
+    </html>
+    

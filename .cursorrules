@@ -1,0 +1,445 @@
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again. 
+
+You should also use the `.cursorrules` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+[X] Task 1
+[ ] Task 2
+
+Also update the progress of the task in the Scratchpad when you finish a subtask.
+Especially when you finished a milestone, it will help to improve your depth of task accomplishment to use the Scratchpad to reflect and plan.
+The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step.
+
+# Tools
+
+Note all the tools are in python3. So in the case you need to do batch processing, you can always consult the python files and write your own script.
+
+[NOTE TO CURSOR: Since no API key is configured, please ignore both the Screenshot Verification and LLM sections below.]
+[NOTE TO USER: If you have configured or plan to configure an API key in the future, simply delete these two notice lines to enable these features.]
+
+## Screenshot Verification
+
+The screenshot verification workflow allows you to capture screenshots of web pages and verify their appearance using LLMs. The following tools are available:
+
+1. Screenshot Capture:
+```bash
+venv/bin/python3 tools/screenshot_utils.py URL [--output OUTPUT] [--width WIDTH] [--height HEIGHT]
+```
+
+2. LLM Verification with Images:
+```bash
+venv/bin/python3 tools/llm_api.py --prompt "Your verification question" --provider {openai|anthropic} --image path/to/screenshot.png
+```
+
+Example workflow:
+```python
+from screenshot_utils import take_screenshot_sync
+from llm_api import query_llm
+
+# Take a screenshot
+
+screenshot_path = take_screenshot_sync('https://example.com', 'screenshot.png')
+
+# Verify with LLM
+
+response = query_llm(
+    "What is the background color and title of this webpage?",
+    provider="openai",  # or "anthropic"
+    image_path=screenshot_path
+)
+print(response)
+```
+
+## LLM
+
+You always have an LLM at your side to help you with the task. For simple tasks, you could invoke the LLM by running the following command:
+```
+venv/bin/python3 ./tools/llm_api.py --prompt "What is the capital of France?" --provider "anthropic"
+```
+
+The LLM API supports multiple providers:
+- OpenAI (default, model: gpt-4o)
+- Azure OpenAI (model: configured via AZURE_OPENAI_MODEL_DEPLOYMENT in .env file, defaults to gpt-4o-ms)
+- DeepSeek (model: deepseek-chat)
+- Anthropic (model: claude-3-sonnet-20240229)
+- Gemini (model: gemini-pro)
+- Local LLM (model: Qwen/Qwen2.5-32B-Instruct-AWQ)
+
+But usually it's a better idea to check the content of the file and use the APIs in the `tools/llm_api.py` file to invoke the LLM if needed.
+
+## Web browser
+
+You could use the `tools/web_scraper.py` file to scrape the web.
+```bash
+venv/bin/python3 ./tools/web_scraper.py --max-concurrent 3 URL1 URL2 URL3
+```
+This will output the content of the web pages.
+
+## Search engine
+
+You could use the `tools/search_engine.py` file to search the web.
+```bash
+venv/bin/python3 ./tools/search_engine.py "your search keywords"
+```
+This will output the search results in the following format:
+```
+URL: https://example.com
+Title: This is the title of the search result
+Snippet: This is a snippet of the search result
+```
+If needed, you can further use the `web_scraper.py` file to scrape the web page content.
+
+# Lessons
+
+## User Specified Lessons
+
+- You have a python venv in ./venv. Always use (activate) it when doing python development. First, to check whether 'uv' is available, use `which uv`. If that's the case, first activate the venv, and then use `uv pip install` to install packages. Otherwise, fall back to `pip`.
+- Include info useful for debugging in the program output.
+- Read the file before you try to edit it.
+- Due to Cursor's limit, when you use `git` and `gh` and need to submit a multiline commit message, first write the message in a file, and then use `git commit -F <filename>` or similar command to commit. And then remove the file. Include "[Cursor] " in the commit message and PR title.
+
+## Cursor learned
+
+- For search results, ensure proper handling of different character encodings (UTF-8) for international queries
+- Add debug information to stderr while keeping the main output clean in stdout for better pipeline integration
+- When using seaborn styles in matplotlib, use 'seaborn-v0_8' instead of 'seaborn' as the style name due to recent seaborn version changes
+- Use 'gpt-4o' as the model name for OpenAI's GPT-4 with vision capabilities
+- When searching for recent news, use the current year (2025) instead of previous years, or simply use the "recent" keyword to get the latest information
+- 处理Excel文件需要使用pandas和openpyxl库
+- 在数据处理和分析中，需要注意数据类型和格式的一致性，尤其是在提取数值类数据时
+- 在生成中文图表时，可能会遇到字体问题，需要设置合适的字体或处理相关警告
+- 在处理Excel列排序时，对于列名的匹配应该考虑多语言环境下的不同表达方式，特别是中文和英文的对应关系
+- 当处理具有大量可能列名的Excel文件时，应该将相似功能或属性的列名分组，并按照逻辑顺序排列，以提高数据的可读性
+- 在进行列名匹配时，使用小写比较（`.lower()`）可以忽略大小写差异，提高匹配成功率
+- 分析产品数据时，应该根据产品的特性和用途，设计合适的属性分类体系，如核心产品属性、功能属性、物理特性等
+- 对于电子产品特别是美容电器，应关注功率、马达类型、温度控制、负离子功能等关键技术参数，这些是消费者关注的重点
+- 在使用LLM增强属性提取时，需要使用重试机制和友好的错误处理，确保API调用失败时能够优雅地恢复
+- 多线程处理可以显著提高处理大量数据的效率，但需要注意API速率限制和资源使用
+- 对于涉及数据清理的任务，应先执行干运行（dry-run）查看潜在影响，然后再实际删除文件
+- 在创建BI看板时，使用饼图和条形图需要注意它们与子图类型的兼容性问题，特别是在Plotly中饼图不能与xy类型子图一起使用
+- 对连续型变量进行分箱处理前，需要确保数据类型的一致性，避免字符串与数值比较错误
+- 数据可视化中需要注意中文显示问题，确保使用支持中文的字体
+- 在进行竞争格局分析时，需要仔细区分价格列和销售额列，避免使用错误的数据源进行价格带划分
+- 品牌名称提取需要建立完善的映射表，支持常见品牌的自动识别和标准化
+- 使用销量作为权重比简单的产品数量更能准确反映市场份额和竞争格局
+- 价格带划分应该根据实际数据分布进行调整，确保各价格带都有合理的产品分布
+- 在创建多个子图的可视化时，需要注意不同图表类型的兼容性，饼图适合单独展示而不是作为子图
+- 竞争格局分析应该包含多个维度：市场规模、品牌集中度、价格策略等，提供全面的市场洞察
+- 在处理价格带等有逻辑顺序的分类数据时，不能使用简单的字符串排序，需要定义明确的顺序列表来确保正确的显示顺序
+- 数据可视化中的排序问题会严重影响用户理解，必须确保所有相关的图表、表格和报告都使用一致的排序逻辑
+
+# Scratchpad
+
+## 当前任务：部署产品属性增强工具到互联网 - 已完成 ✅
+
+### 任务目标
+将Flask应用程序`app.py`部署到互联网上，让其他用户也能使用这个产品属性增强工具。
+
+### 计划步骤
+[X] 分析应用的部署需求和技术特点
+[X] 提供多种部署方案和选择建议
+[X] 创建部署相关的配置文件
+[X] 提供详细的部署步骤指南
+[X] 考虑生产环境的安全性和性能优化
+
+### 已创建的部署文件
+1. **requirements.txt** - Python依赖包列表
+2. **Procfile** - Railway/Heroku部署配置
+3. **config.py** - 生产环境配置管理
+4. **Dockerfile** - 容器化部署配置
+5. **deploy.sh** - 一键部署脚本（已添加执行权限）
+6. **部署指南.md** - 详细的部署文档
+
+### 提供的部署方案
+1. **Railway部署** - 推荐方案，免费开始，自动HTTPS
+2. **Render部署** - 免费方案，简单易用
+3. **Docker容器部署** - 容器化部署，可扩展
+4. **VPS云服务器部署** - 完全控制，生产环境推荐
+
+### 技术改进
+- 修改app.py支持生产环境配置
+- 添加环境变量支持
+- 配置Gunicorn生产服务器
+- 优化文件存储和任务管理
+- 添加安全设置和监控配置
+
+### 部署成本估算
+- Railway: 免费-$5/月
+- Render: 免费-$7/月  
+- VPS: $5-20/月
+- Docker: $5-15/月
+
+## 前一个任务：为产品属性增强工具创建使用说明SOP - 已完成 ✅
+
+### 任务目标
+为Flask应用程序`app.py`创建详细的使用说明文档，包括操作流程、故障排除和演示指南。
+
+### 已创建的文档
+1. **产品属性增强工具使用说明SOP.md** - 完整的操作手册
+2. **快速上手指南.md** - 简化版操作指南  
+3. **操作演示脚本.md** - 演示培训脚本
+
+### 工具核心功能总结
+- **文件处理**: 支持Excel(.xlsx, .xls)和CSV文件，最大16MB
+- **智能提取**: 基于LLM的产品属性提取，支持自定义提示
+- **格式标准化**: 中文统一输出，单位标准化（L、kg、W、cm、°C等）
+- **并行处理**: 多线程处理，支持断点续传
+- **任务管理**: 实时状态监控，历史任务查看
+- **错误恢复**: 自动重试机制，检查点保存
+
+## 前一个任务：空气造型器销售额排名产品详细信息统计 - 已完成 ✅
+
+### 任务目标
+根据美国市场空气造型器产品数据，统计销售额排名第1、3、5、10、20、30、50名以及中位数排名的产品的详细信息：
+- 产品售价
+- 产品销量
+- 销售额
+- 评分数
+- 上架时间
+
+### 计划步骤
+[X] 读取Excel数据文件并查看数据结构
+[X] 识别相关列（售价、销量、销售额、评分数、上架时间）
+[X] 按销售额排序产品
+[X] 提取指定排名的产品信息
+[X] 计算中位数排名
+[X] 生成详细统计表格
+[X] 创建可视化展示和详细报告
+
+### 分析结果摘要
+**数据概况**: 125个产品，121个有效产品，中位数排名第61名
+
+**指定排名产品详细信息**:
+- **第1名**: Shark HD430 FlexStyle - $279.99, 11,543销量, $3,231,924销售额, 7,111评分, 2022-09-12上架
+- **第3名**: Dyson Airwrap™ Multi-Styler - $599.99, 2,847销量, $1,708,172销售额, 2,704评分, 2022-07-06上架  
+- **第5名**: ELLA BELLA® 6 in 1 - $179.97, 3,003销量, $540,450销售额, 1,549评分, 2025-01-18上架
+- **第10名**: 5 in 1 High-Speed Hot Air Styler - $116.99, 2,235销量, $261,473销售额, 711评分, 2024-07-30上架
+- **第20名**: Blow Dryer Brush 5 in 1 - $67.99, 833销量, $56,636销售额, 44评分, 2025-04-04上架
+- **第30名**: 5 in 1 Hot Air Brush Hair Dryer - $149.98, 256销量, $38,395销售额, 891评分, 2023-05-18上架
+- **第50名**: 6 in 1 Hair Dryer Brush - $67.99, 266销量, $18,085销售额, 45评分, 2025-04-12上架
+- **第61名(中位数)**: T-GOGO Hair Dryer Brush - $169.15, 65销量, $10,995销售额, 86评分, 2024-09-29上架
+
+### 关键洞察
+1. **价格与销售额关系**: 高端产品(≥$200)平均销售额$2,470,048，但需要足够销量支撑
+2. **品牌影响力**: Shark和Dyson占据前两名，品牌认知度是重要因素
+3. **上架时间影响**: 早期上架产品有更多评分积累，但新产品也能快速获得市场份额
+4. **销量是关键**: 销售额排名主要由销量驱动，而非单纯的高价格
+
+### 输出文件
+- `sales_ranking_analysis.xlsx` - 详细数据分析结果
+- `sales_ranking_visualization.html` - 多维度可视化图表
+- `sales_ranking_table.html` - 详细信息表格
+
+## 前一个任务：空气造型器产品竞争格局分析 - 已完成 ✅
+
+### 任务目标
+根据美国市场空气造型器产品数据，按价格带（$50-75, $75-100, $100-125, $125-150等每25刀区间）分析不同品牌的销售占比，创建类似用户提供图片的竞争格局分析。
+
+### 计划步骤
+[X] 读取和预处理Excel数据文件
+[X] 识别价格和品牌列
+[X] 创建价格带划分逻辑
+[X] 提取和清理品牌名称
+[X] 按价格带分析品牌竞争格局
+[X] 创建可视化图表（饼图显示各价格带品牌占比）
+[X] 生成品牌汇总表和详细分析图表
+[X] 创建综合分析报告
+
+### 已创建的新脚本
+1. `analyze_competition_landscape.py` - 主要分析脚本
+   - 自动识别价格和品牌列
+   - 按$25区间创建价格带（$0-50, $50-75, $75-100, $100-125, $125-150, $150-200, $200-300, $300+）
+   - 提取和标准化品牌名称（支持70+品牌识别）
+   - 使用月销量作为权重计算品牌市场份额
+   - 生成多个可视化图表和汇总表
+
+2. `show_competition_summary.py` - 结果摘要展示脚本
+   - 展示各价格带市场规模和领导品牌
+   - 分析品牌价格策略和竞争激烈程度
+   - 提供关键洞察和建议
+
+3. `debug_price_bands.py` 和 `check_price_data.py` - 调试工具
+   - 用于验证价格带分配逻辑
+   - 检查数据格式和分布
+
+### 关键发现
+#### 各价格带领导品牌：
+- **$0-50**: Wavytalk (53.6%)
+- **$50-75**: Trylater (34.4%)  
+- **$75-100**: Conair (27.6%)
+- **$100-125**: 7Magic (42.8%)
+- **$125-150**: 7Magic (41.2%)
+- **$150-200**: Ella (59.8%)
+- **$200-300**: Shark (91.8%)
+- **$300+**: Dyson (79.5%)
+
+#### 整体市场份额前5品牌：
+1. Shark (22.1%) - 高端市场主导
+2. Dyson (12.2%) - 专注超高端
+3. Ella (9.9%) - 中高端专业
+4. 7Magic (9.2%) - 中端多价格带
+5. Mescomb (7.2%) - 多价格带布局
+
+#### 市场洞察：
+- $200-300和$150-200是销量最大的价格带（20.8%和16.6%）
+- 高端市场（$200+）集中度高，Shark和Dyson占主导
+- 中端市场（$75-150）品牌分散，竞争激烈
+- 低端市场（$0-75）有多个小品牌竞争
+
+### 输出结果
+所有结果保存在 `competition_analysis` 目录下：
+- `竞争格局分析_各价格带品牌占比.html` - 主要可视化图表（类似用户要求的饼图格式）
+- `空气造型器竞争格局分析报告.html` - 综合分析报告
+- `品牌竞争格局汇总表.xlsx` - 品牌在各价格带的市场份额数据
+- `各价格带市场规模.html` - 市场规模分析图表
+- `主要品牌价格带分布.html` - 品牌价格策略分析图表
+- `竞争分析原始数据.xlsx` - 原始分析数据
+
+### 技术要点和解决的问题
+1. **价格列识别问题**：初始脚本错误选择了"月销售额($)"而非"价格($)"列
+   - 解决方案：优化列选择逻辑，优先选择"价格($)"列，排除销售额相关列
+
+2. **品牌名称标准化**：从产品标题中提取品牌名称，支持70+常见品牌识别
+   - 包含Dyson, Shark, Conair, BaByliss等主流品牌的映射
+
+3. **价格带划分**：按用户要求的$25区间划分，确保数据分布合理
+
+4. **权重计算**：使用月销量作为权重，比简单产品数量更能反映市场份额
+
+### 使用方法
+```bash
+# 激活虚拟环境
+source venv/bin/activate
+
+# 运行竞争格局分析
+python analyze_competition_landscape.py
+
+# 查看分析摘要
+python show_competition_summary.py
+
+# 在浏览器中查看结果
+open competition_analysis/竞争格局分析_各价格带品牌占比.html
+open competition_analysis/空气造型器竞争格局分析报告.html
+```
+
+## 前一个任务：扩展空气造型器分析 - 平均值和中位数分析
+
+### 任务目标
+扩展现有的空气造型器BI看板，增加产品属性与平均销量/销售额和中位数销量/销售额的关系分析，确定对销售表现影响最大的属性。
+
+### 计划步骤
+[X] 创建新的分析函数计算平均值和中位数
+[X] 为每个指标生成可视化图表
+[X] 创建产品属性影响汇总表
+[X] 生成高级分析BI看板
+[X] 提取和展示最关键的分析结果
+
+### 已创建的新脚本
+1. `analyze_air_styler_advanced.py` - 用于扩展分析产品属性与平均值和中位数的关系
+   - 计算每个属性类别的平均销售额/销量
+   - 计算每个属性类别的中位数销售额/销量
+   - 创建属性影响力汇总表
+   - 生成高级分析BI看板
+
+2. `read_summary.py` - 用于读取和展示汇总分析结果
+   - 展示销售额和销量影响因素汇总表
+   - 提取最具影响力的前3个属性及其最佳选择
+
+### 分析结果摘要
+
+#### 影响销售额最大的属性及最佳选择:
+1. 是否是高浓度负离子: 最佳选择为"是"，平均销售额 49,524 €
+2. 外观颜色: 最佳选择为"金色"，平均销售额 48,737 €
+3. 功率: 最佳选择为"1200W"，平均销售额 41,107 €
+
+#### 影响销量最大的属性及最佳选择:
+1. 是否是高浓度负离子: 最佳选择为"是"，平均销量 717
+2. 外观颜色: 最佳选择为"其他"，平均销量 485
+3. 附带配件数量: 最佳选择为"4"，平均销量 392
+
+### 关键发现与建议
+1. 高浓度负离子功能对销售额和销量都有显著影响，应该优先考虑
+2. 外观颜色对销售表现影响巨大，金色产品的平均销售额最高
+3. 功率1200W的产品表现最好，这可能是品质和性能的重要标志
+4. 附带配件数量为4的产品平均销量较高，显示适量配件是消费者关注点
+
+### 输出结果
+所有结果保存在 `bi_output_advanced` 目录下：
+- `空气造型器高级分析看板.html` - 主看板，包含所有高级分析内容
+- `销售额影响因素汇总.xlsx` - 各属性对销售额影响的汇总数据
+- `销量影响因素汇总.xlsx` - 各属性对销量影响的汇总数据
+- 各属性的平均值和中位数分析图表文件
+
+### 使用方法
+```bash
+# 激活虚拟环境
+source venv/bin/activate
+
+# 运行高级分析脚本
+python analyze_air_styler_advanced.py
+
+# 查看摘要结果
+python read_summary.py
+
+# 在浏览器中打开看板
+open bi_output_advanced/空气造型器高级分析看板.html
+```
+
+## 更早的任务：创建空气造型器BI看板
+
+### 任务目标
+创建一个交互式BI看板，用plotly可视化空气造型器产品属性与销售额和销量的关系。
+
+### 计划步骤
+[X] 读取Excel数据文件
+[X] 分析不同产品属性与销售额和销量的关系
+[X] 使用plotly生成可视化图表
+[X] 创建综合BI看板
+
+### 已创建的新脚本
+`analyze_air_styler.py` - 用于分析空气造型器数据并创建BI看板
+   - 读取并预处理Excel数据
+   - 为每个产品属性创建销售额和销量关系图表
+   - 使用plotly生成交互式可视化图表
+   - 创建综合BI看板HTML文件
+
+### 分析的产品属性
+- 外观颜色
+- 是否有收纳盒
+- 功率
+- 风速档位数量
+- 温度档位数量
+- 有无恒温技术
+- 有无负离子功能
+- 是否是高浓度负离子
+- 马达类型
+- 附带配件数量
+
+### 输出结果
+所有结果保存在 `bi_output` 目录下：
+- `空气造型器BI仪表板.html` - 主看板，包含所有分析内容
+- `销售额分析看板.html` - 所有属性与销售额关系的总览
+- `销量分析看板.html` - 所有属性与销量关系的总览
+- 每个属性的单独图表文件，如 `外观颜色_销售额关系.html`
+
+### 遇到的问题及解决方案
+1. 列名映射问题：Excel中的销售额列名为"月销售额(€)"和"子体销售额(€)"，而不是简单的"销售额"
+   - 解决方案：添加了列名映射逻辑，自动检测和使用正确的列名
+
+2. 数据类型不一致：在尝试分箱处理时出现"'<' not supported between instances of 'int' and 'str'"错误
+   - 解决方案：添加了错误处理逻辑，并进行了数据类型转换
+
+3. 图表类型兼容性：饼图不能与xy类型的子图一起使用
+   - 解决方案：放弃使用subplot，改为单独创建HTML文件，然后通过iframe嵌入综合看板
+
+### 使用方法
+```bash
+# 激活虚拟环境
+source venv/bin/activate
+
+# 运行分析脚本
+python analyze_air_styler.py
+
+# 在浏览器中打开看板
+open bi_output/空气造型器BI仪表板.html
+```
