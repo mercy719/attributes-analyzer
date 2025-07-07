@@ -493,4 +493,5 @@ if __name__ == '__main__':
     debug = os.environ.get('FLASK_ENV') != 'production'
     host = os.environ.get('HOST', '0.0.0.0')
     
+    print(f"Starting app on {host}:{port}, debug={debug}")
     app.run(debug=debug, host=host, port=port) 
