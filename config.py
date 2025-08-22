@@ -12,7 +12,7 @@ class Config:
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB
     
     # API配置
-    DEFAULT_DEEPSEEK_API_KEY = os.environ.get('DEEPSEEK_API_KEY', 'sk-0306bfe4b4974f8f93cc21cd18164167')
+    DEFAULT_DEEPSEEK_API_KEY = os.environ.get('DEEPSEEK_API_KEY', '')
     
     # 生产环境配置
     DEBUG = os.environ.get('FLASK_ENV') != 'production'
